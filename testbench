@@ -1,0 +1,39 @@
+`timescale 1ns / 1ps 
+//.clk(clk),  
+module initial_project_tb; 
+    // Parameters 
+   parameter CLK_PERIOD = 10; // Clock period in time units 
+//    parameter SIM_TIME = 200; // Simulation time in time units 
+    // Signals 
+    reg clk; 
+    reg rst; 
+    wire [2:0] light_A; 
+    wire [2:0] light_B; 
+    wire [2:0] light_C; 
+    wire [2:0] light_D; 
+    wire [2:0] light_M1; 
+    wire [2:0] light_M3; 
+    wire [2:0] light_M5; 
+    wire [2:0] light_M7; 
+    // Instantiate the TLC module 
+    initial_project dut ( 
+        .clk(clk), 
+        .rst(rst), 
+        .light_A(light_A), 
+        .light_B(light_B), 
+        .light_C(light_C), 
+        .light_D(light_D), 
+        .light_M1(light_M1), 
+        .light_M3(light_M3), 
+        .light_M5(light_M5), 
+        .light_M7(light_M7) 
+    ); 
+    // Clock generation 
+    always #((CLK_PERIOD / 2)) clk = ~clk; 
+    // Reset generation 
+    initial begin 
+        rst = 1; 
+        #10; 
+        rst = 0; 
+    end 
+endmodule
